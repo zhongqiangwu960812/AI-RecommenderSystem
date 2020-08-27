@@ -14,8 +14,7 @@
 * 优点： 可解释性强， 直观， 简单
 * 缺点： 泛化能力差， 没有用到用户， 物品和上下文特征
 
-<br>
-筋斗云：[AI上推荐 之 协同过滤](https://blog.csdn.net/wuzhongqiang/article/details/107891787)
+筋斗云：[AI上推荐之协同过滤](https://blog.csdn.net/wuzhongqiang/article/details/107891787)
 
 ## [1.2 隐语义模型与矩阵分解](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/LFM_MF)
  协同过滤的特点就是完全没有利用到物品本身或者是用户自身的属性， 仅仅利用了用户与物品的交互信息就可以实现推荐，是一个可解释性很强， 非常直观的模型， 但是也存在一些问题， 第一个就是处理稀疏矩阵的能力比较弱， 所以为了**使得协同过滤更好处理稀疏矩阵问题， 增强泛化能力**， 从协同过滤中衍生出矩阵分解模型(Matrix Factorization,MF), 并发展出了矩阵分解的分支模型。在协同过滤共现矩阵的基础上， 使用更稠密的隐向量表示用户和物品， 挖掘用户和物品的隐含兴趣和隐含特征， 在一定程度上弥补协同过滤模型处理稀疏矩阵能力不足的问题。
@@ -24,8 +23,7 @@
 * 优点： 泛化能力强， 空间复杂度低， 更好的扩展性和灵活性
 * 缺点：依然没有用到用户， 物品和上下文特征
  
- <br>
- 筋斗云：[AI上推荐 之 隐语义模型(LFM)和矩阵分解(MF)](https://blog.csdn.net/wuzhongqiang/article/details/108173885)
+ 筋斗云：[AI上推荐之隐语义模型(LFM)和矩阵分解(MF)](https://blog.csdn.net/wuzhongqiang/article/details/108173885)
  
  
 # 2. 深度学习的浪潮之巅
