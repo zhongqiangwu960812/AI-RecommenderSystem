@@ -70,7 +70,7 @@ $$\operatorname{Precision}=\frac{\sum_{u} \mid R(u) \cap T(u)}{\sum_{u}|R(u)|}$$
 3. ItemCF.ipynb, UserCF.ipynb:  非常详细解说ItemCF, UserCF算法的实现
 4. ItemCF.py, UserCF.py: 把上面的代码封装成了一个类的形式
 5. RecommendExample_GuessScore.ipynb:  博客链接里面猜测用户打分的代码例子， 具体可以参考上面的博客链接
-
+6. 协同过滤.ipynb:  这是个参考文件
 
 # 工业界推荐系统常见的问题
 ## 工业界协同过滤的流程
