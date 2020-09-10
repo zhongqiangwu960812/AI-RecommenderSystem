@@ -34,7 +34,7 @@
  * 优点： GBDT与LR模型互补， 实现了特征工程的自动化模式， 且增加了特征交叉组合的能力， 能够利用更加高阶的特征
  * 缺点： 容易过拟合， 对于调参带来了难度
  
- 筋斗云：[AI上推荐 之 逻辑回归模型与GBDT+LR(特征工程模型化的开端)](https://blog.csdn.net/wuzhongqiang/article/details/108349729)
+ 筋斗云：[AI上推荐 之 逻辑回归模型与GBDT+LR(特征工程模型化的开端)](https://blog.csdn.net/wuzhongqiang/article/details/108349729)<br>
  
 # 2. 深度学习的浪潮之巅
 ![](imgs/深度学习模型演化关系图.png)
@@ -44,3 +44,4 @@
 * 王喆-《深度学习推荐系统》
 * [https://github.com/BlackSpaceGZY/Recommender-System-with-TF2.0](https://github.com/BlackSpaceGZY/Recommender-System-with-TF2.0)
 * [https://github.com/shenweichen/DeepCTR](https://github.com/shenweichen/DeepCTR)
+* 相关论文： [https://github.com/zhongqiangwu960812/ReadPapaers/tree/master/RecommendSystem](https://github.com/zhongqiangwu960812/ReadPapaers/tree/master/RecommendSystem)
