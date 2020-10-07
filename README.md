@@ -48,6 +48,8 @@ FM模型是2010年提出， FFM模型是2015年提出， 这两个属于因子�
 # 2. 深度学习的浪潮之巅
 ![](imgs/深度学习模型演化关系图.png)
 
+## [2.1 DeepCrossing模型](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/Deep_Crossing)
+
 # 参考：
 * 项亮-《推荐系统实践》
 * 王喆-《深度学习推荐系统》
