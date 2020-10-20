@@ -4,6 +4,7 @@
 * [Amazon Dataset](https://github.com/ZiyaoGeng/Recommender-System-with-TF2.0/wiki/Amazon-Dataset)
 * [Criteo Dataset](https://github.com/ZiyaoGeng/Recommender-System-with-TF2.0/wiki/Criteo-Dataset)
 
+模型的原理部分， 可以参考我的博客链接[推荐系统学习笔记](https://blog.csdn.net/wuzhongqiang/category_10128687.html)
 # 1. 传统的推荐算法模型
 
 ![传统推荐模型演化关系图](imgs/传统推荐模型演化关系图.png)
