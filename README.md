@@ -61,6 +61,16 @@ FM模型是2010年提出， FFM模型是2015年提出， 这两个属于因子�
 这就是DeepCrossing的结构了， 比较清晰和简单， 没有引入特殊的模型结构， 只是常规的Embedding+多层神经网络。但这个网络模型的出现， 有革命意义。 DeepCrossing模型中没有任何人工特征工程的参与， 只需要清洗一下， 原始特征经Embedding后输入神经网络层， 自主交叉和学习。 相比于FM， FFM只具备二阶特征交叉能力的模型， DeepCrossing可以通过调整神经网络的深度进行特征之间的“深度交叉”， 这也是Deep Crossing名称的由来。
 
 筋斗云：[AI上推荐 之 AutoRec与Deep Crossing模型(改变神经网络的复杂程度）](https://blog.csdn.net/wuzhongqiang/article/details/108948440)<br>
+## [2.2 NeuralCF Model](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/NeuralCF)
+Neural CF是2017年新加坡国立大学的研究人员提出的一个模型， 提出的动机就是看着MF的内积操作比较简单， 表达能力不强， 而此时正是深度学习的浪潮啊， 所以作者就用一个“多层的神经网络+输出层”替换了矩阵分解里面的内积操作， 这样做一是让用户向量和物品向量做更充分的交叉， 得到更多有价值的特征组合信息。 二是引入更多的非线性特征， 让模型的表达能力更强。 模型如下：
+
+![](https://img-blog.csdnimg.cn/20201019200457212.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center)
+
+该模型的优缺点：
+* 优点： 表达能力加强版的矩阵分解
+* 局限： 只用了用户和物品的id特征， 没有加入更多其他特征
+
+筋斗云： [AI上推荐 NCF模型](https://blog.csdn.net/wuzhongqiang/article/details/108985457)
 
 ## [2.3 Product-based Neural Networks](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/PNN)
 该模型是2016年上海交大团队提出的一个模型， PNN模型在输入、Embedding层， 多层神经网络及最后的输出层与DeepCrossing没有区别， 唯一的就是Stacking层换成了这里的Product层， 结构如下：
