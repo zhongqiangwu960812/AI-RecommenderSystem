@@ -62,6 +62,17 @@ FM模型是2010年提出， FFM模型是2015年提出， 这两个属于因子�
 
 筋斗云：[AI上推荐 之 AutoRec与Deep Crossing模型(改变神经网络的复杂程度）](https://blog.csdn.net/wuzhongqiang/article/details/108948440)<br>
 
+## [2.3 Product-based Neural Networks](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/PNN)
+该模型是2016年上海交大团队提出的一个模型， PNN模型在输入、Embedding层， 多层神经网络及最后的输出层与DeepCrossing没有区别， 唯一的就是Stacking层换成了这里的Product层， 结构如下：
+
+![](https://img-blog.csdnimg.cn/20201019225606860.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center)
+
+该模型的提出是为了研究特征之间的交叉方式， DeepCrossing模型是加深了网络的层数， 但是不同特征的embedding向量它统一放入了一个全连接层里面去学习， 这可能会丢失掉一些信息， 比如可能有特征之间一点关系也没有， 有特征之间关系非常相似， 这种在DeepCrossing之中是没法学习到的。 所以PNN 模型用了Product层替换了原来的stacking层， 在这里面主要就是两两特征的外积和内积交叉。这一块的内容我已经更新到博客：
+* 优点： 提高特征交叉能力， 使得模型学习特征有了针对性
+* 局限： “外积”操作一定程度上会影响表达能力
+
+筋斗云： [AI上推荐 PNN模型(改变特征交叉方式）](https://blog.csdn.net/wuzhongqiang/article/details/108985457)
+
 # 参考：
 * 项亮-《推荐系统实践》
 * 王喆-《深度学习推荐系统》
