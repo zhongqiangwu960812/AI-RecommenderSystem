@@ -83,6 +83,21 @@ Neural CF是2017年新加坡国立大学的研究人员提出的一个模型， 
 
 筋斗云： [AI上推荐 PNN模型(改变特征交叉方式）](https://blog.csdn.net/wuzhongqiang/article/details/108985457)
 
+## [2.4 Wide&Deep Networks](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/WideDeep)
+这是谷歌在2016年提出的一个经典模型， 该模型在深度学习的模型中处在了非常重要的地位，它将线性模型与DNN很好的结合起来，在提高模型泛化能力的同时，兼顾模型的记忆性。Wide&Deep这种线性模型与DNN的并行连接模式，后来成为推荐领域的经典模式， 奠定了后面深度学习模型的基础。具体的结构如下：
+![](https://img-blog.csdnimg.cn/20201026181206978.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center)
+该模型取得成功的关键在于它的两个特色：
+* 抓住业务问题的本质特点， 能够融合传统模型的记忆能力和深度模型的泛化能力
+* 结构简单， 容易在工程上实现，训练和部署
+
+筋斗云：![AI上推荐 之 Wide&Deep与Deep&Cross模型(记忆与泛化并存的华丽转身）](https://blog.csdn.net/wuzhongqiang/article/details/109254498)
+
+## [2.5 Deep&Cross NetWork(DCN)](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/DeepCross)
+这是2017年， 斯坦福大学和谷歌的研究人员在ADKDD会议上提出的模型， 该模型针对W&D的wide部分进行了改进， 因为Wide部分有一个不足就是需要人工进行特征的组合筛选， 过程繁琐且需要经验， 2阶的FM模型在线性的时间复杂度中自动进行特征交互，但是这些特征交互的表现能力并不够，并且随着阶数的上升，模型复杂度会大幅度提高。于是乎，作者用一个Cross Network替换掉了Wide部分，来自动进行特征之间的交叉，并且网络的时间和空间复杂度都是线性的。 通过与Deep部分相结合，构成了深度交叉网络（Deep & Cross Network），简称DCN。模型结构如下：
+![](https://img-blog.csdnimg.cn/20201026193641246.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center)
+
+Deep&Cross的设计思路相比于W&D并没有本质上的改变，但是Cross交叉网络的引进使得模型的记忆部分的能力更加强大了。具体的可以参考博客：<br><br>
+筋斗云：![AI上推荐 之 Wide&Deep与Deep&Cross模型(记忆与泛化并存的华丽转身）](https://blog.csdn.net/wuzhongqiang/article/details/109254498)
 # 参考：
 * 项亮-《推荐系统实践》
 * 王喆-《深度学习推荐系统》
