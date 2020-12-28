@@ -4,7 +4,7 @@
 * [Amazon Dataset](https://github.com/ZiyaoGeng/Recommender-System-with-TF2.0/wiki/Amazon-Dataset)
 * [Criteo Dataset](https://github.com/ZiyaoGeng/Recommender-System-with-TF2.0/wiki/Criteo-Dataset)
 
-模型的原理部分， 可以参考我的博客链接[推荐系统学习笔记](https://blog.csdn.net/wuzhongqiang/category_10128687.html)
+这些数据集太大了，我这边单机测试不了，所以我目前用的数据集都是从里面采样了一小部分出来的， 基于已有的数据集先跑通各个模型， 等有以后有条件了，会把试验重新走一遍哈哈。关于模型的原理部分， 可以参考我的博客链接[推荐系统学习笔记](https://blog.csdn.net/wuzhongqiang/category_10128687.html)
 # 1. 传统的推荐算法模型
 
 ![传统推荐模型演化关系图](imgs/传统推荐模型演化关系图.png)
