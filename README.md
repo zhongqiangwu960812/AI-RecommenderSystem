@@ -90,28 +90,32 @@ Neural CF是2017年新加坡国立大学的研究人员提出的一个模型， 
 * 抓住业务问题的本质特点， 能够融合传统模型的记忆能力和深度模型的泛化能力
 * 结构简单， 容易在工程上实现，训练和部署
 
-筋斗云：![AI上推荐 之 Wide&Deep与Deep&Cross模型(记忆与泛化并存的华丽转身）](https://blog.csdn.net/wuzhongqiang/article/details/109254498)
+筋斗云：[AI上推荐 之 Wide&Deep与Deep&Cross模型(记忆与泛化并存的华丽转身）](https://blog.csdn.net/wuzhongqiang/article/details/109254498)
 
 ## [2.5 Deep&Cross NetWork(DCN)](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/DeepCross)
 这是2017年， 斯坦福大学和谷歌的研究人员在ADKDD会议上提出的模型， 该模型针对W&D的wide部分进行了改进， 因为Wide部分有一个不足就是需要人工进行特征的组合筛选， 过程繁琐且需要经验， 2阶的FM模型在线性的时间复杂度中自动进行特征交互，但是这些特征交互的表现能力并不够，并且随着阶数的上升，模型复杂度会大幅度提高。于是乎，作者用一个Cross Network替换掉了Wide部分，来自动进行特征之间的交叉，并且网络的时间和空间复杂度都是线性的。 通过与Deep部分相结合，构成了深度交叉网络（Deep & Cross Network），简称DCN。模型结构如下：
 ![](https://img-blog.csdnimg.cn/20201026193641246.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center)
 
 Deep&Cross的设计思路相比于W&D并没有本质上的改变，但是Cross交叉网络的引进使得模型的记忆部分的能力更加强大了。具体的可以参考博客：<br><br>
-筋斗云：![AI上推荐 之 Wide&Deep与Deep&Cross模型(记忆与泛化并存的华丽转身）](https://blog.csdn.net/wuzhongqiang/article/details/109254498)
+筋斗云：[AI上推荐 之 Wide&Deep与Deep&Cross模型(记忆与泛化并存的华丽转身）](https://blog.csdn.net/wuzhongqiang/article/details/109254498)
 
 ## [2.6 DeepFM Networks](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/DeepFM)
 这是2017年哈工大和华为公司联合提出的一个模型，CTR预测任务中， 高阶和低阶特征的学习都非常的重要， 线性模型虽然简单，但是没法学习交叉特征且特征工程是个经验活，而FM考虑了低阶交叉， 深度学习模型有着天然的学习特征之间高阶交叉的能力，但是有些深度学习模型却忽略了只顾着学习泛化而忽略了记忆能力，也就是他们一般学习了特征之间的高阶交叉信息而忽略了低阶交叉的重要性。 比如PNN， FNN， 等。 D&W模型架构同时考虑了记忆和泛化，但是wide的部分需要进行特征工程， 所以为了去掉特征工程的繁琐细节，实现一个端到端的CTR预测模型，也为了同时兼顾低阶和高阶交叉特征信息的学习， 该paper，作者提出了DeepFM模型， 这个模型基于了W&D模型，组合了FM和DNN， 把FM的低阶交叉和DNN的高阶交叉学习做到了各司其职且物尽其用，最后做了很多的对比实验证明了该模型要比之前的LR， FM， PNN， FNN， W&D等模型都要好。模型结构如下：
 ![](https://img-blog.csdnimg.cn/20201225092253200.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center)
 
 DeepFM的思路还是很简单的， 但是起的作用也是非常大的， 所以感觉也是一个非常经典的深度组合模型了， 关于该模型的具体细节，具体可以参考我的博客: <br><br>
-筋斗云：![AI上推荐 之 FNN、DeepFM与NFM(FM在深度学习中的身影重现)](https://blog.csdn.net/wuzhongqiang/article/details/109532267)
+筋斗云：[AI上推荐 之 FNN、DeepFM与NFM(FM在深度学习中的身影重现)](https://blog.csdn.net/wuzhongqiang/article/details/109532267)
 
 ## [2.7 NFM Networks](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/NFM)
 这是2017年由新加坡国立大学的何向南教授等人在SIGIR会议上提出的一个模型, 主要是针对FM的一些不足进行改进，主要包括线性模型的局限以及无法进行高阶特征交叉，所以作者认为FM无法胜任生活中各种具有复杂结构和规律性的真实数据，尽管当前有了各种FM的变体改进，但仍然局限于线性表达和二阶交互。所以作者在这里提出了一种将FM融合进DNN的策略，通过一个核心结构特征交叉池化层，使得FM与DNN进行了完美衔接，这样就组合了FM的建模低阶特征交互能力和DNN学习高阶特征交互和非线性的能力，得到了NFM模型。由于FM可以在底层学习更多的特征交互信息，这样在DNN学习高阶交互的时候，用比较简单的结构就可以学习到，所以NFM模型不仅兼顾了低阶和高阶特征学习， 线性和非线性学习，并且训练效率和速度上也也比之前的W&D或者Deep Crossing等模型好。该模型还有一个较大的优势就是适合高维稀疏的数据场景。模型结构如下：
 ![](https://img-blog.csdnimg.cn/20201226203533392.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center)
 
 NFM的思路也是FM+DNN的组合， 只不过这里提出了一种新的连接结构特征交叉池化， 文章传输了一个挺有趣的想法，就是如果底层的模块能够捕捉到更多的交互信息，那么只需要用很浅层的DNN就能达到很好的效果。 关于模型的具体细节，可以参考我的博客。<br><br>
-筋斗云：![AI上推荐 之 FNN、DeepFM与NFM(FM在深度学习中的身影重现)](https://blog.csdn.net/wuzhongqiang/article/details/109532267)
+筋斗云：[AI上推荐 之 FNN、DeepFM与NFM(FM在深度学习中的身影重现)](https://blog.csdn.net/wuzhongqiang/article/details/109532267)
+
+## 2.8 AFM Networks
+
+
 
 # 3. 附加
 
