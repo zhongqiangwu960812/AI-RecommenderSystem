@@ -15,8 +15,9 @@ DIN模型这里终于换了一个数据集， 使用了亚马逊数据集的一�
 ## 文件说明：
 
 1. raw_data/:  原始数据集两个json文件，这里我没有放，这个10个多G，放不上来，可以自己去下载。
-2. model/: 这里面是保存的训练好的DIN模型， 目前没有保存
-3. preprocessed_data: 处理好的数据， 这个数据可以直接导入，在DIN之前，还需要自己制作数据集
-4. data_preprocess.ipynb: 这里面是数据的预处理过程， 读入源数据， 处理好数据放入preprocessed_data里面
-5. DIN_Model.ipynb: DIN模型及其训练
+2. DIN.py: 这里是搭建好的DIN模型
+3. data_preprocess.ipynb: 这里面是数据的预处理过程， 读入源数据， 源数据在raw_data目录下，目前没有放上来，处理好数据放入dataset里面
+4. dataset: 处理好的数据， 这个数据可以直接导入构建数据集了
+5. data_create.py: 这里面是基于上面dataset目录下的文件构建DIN使用的数据集，这里写成了一个函数封装了起来
+6. main.ipynb: 这里面是DIN模型的训练和测试过程
 
