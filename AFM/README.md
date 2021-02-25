@@ -21,3 +21,4 @@ AFM这里的Demo也是基于了kaggle上的一个比赛数据集,  下载链接�
 3. preprocessed_data: 处理好的数据， 这个数据可以直接导入， 构建DataSet
 4. DataLoadAndProprocessing.ipynb: 这里面是数据的预处理过程， 读入源数据， 处理好数据放入preprocessed_data里面
 5. AFM_Model.ipynb: AFM模型及其训练
+
