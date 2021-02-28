@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-
 import tensorflow as tf
 from tensorflow.keras.layers import *
 from tensorflow.keras.models import *
