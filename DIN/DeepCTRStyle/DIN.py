@@ -22,6 +22,9 @@ def build_input_layers(feature_columns):
             input_layer_dict[fc.name] = Input(shape=(fc.dimension, ), name=fc.name, dtype=fc.dtype)
         elif isinstance(fc, VarLenSparseFeat):
             input_layer_dict[fc.name] = Input(shape=(fc.maxlen, ), name=fc.name, dtype=fc.dtype)
+
+            if fc.length_name:
+                input_layer_dict[fc.length_name] = Input((1,), name=fc.length_name, dtype='int32')
     
     return input_layer_dict
 
@@ -49,6 +52,7 @@ def build_embedding_layers(feature_columns, input_layers_dict):
             embedding_layers_dict[fc.name] = Embedding(fc.vocabulary_size, fc.embedding_dim, name='emb_' + fc.name)
         elif isinstance(fc, VarLenSparseFeat):  # 这里加1是因为这个需要填充， 预留一个填充字符的embedding
             embedding_layers_dict[fc.name] = Embedding(fc.vocabulary_size + 1, fc.embedding_dim, name='emb_' + fc.name, mask_zero=True)
+
 
     return embedding_layers_dict
 
@@ -151,11 +155,12 @@ class AttentionPoolingLayer(Layer):
     # 前向传播逻辑
     def call(self, inputs):
         # query: (None, 1, embed_dim)  keys: (None, max_len, embed_dim)
-        query, keys = inputs
+        query, keys, user_behavior_length= inputs
         # 获取行为序列的embedding的mask矩阵，keras中可通过_keras_mask进行获取
         # 这个里面每一行是[False, False, True, True, ....]的形式， False的长度表示样本填充的那部分
         #key_masks = keys._keras_mask   # (None, max_len)    这个代码目前我这里运行出问题 我先换种方式写
-        key_masks = tf.cast(tf.not_equal(keys[:,:,0], 0), dtype=tf.float32)
+        key_masks = tf.sequence_mask(user_behavior_length, keys.shape[1])  # (None, 1, max_len)  这里注意user_behavior_length是(None,1)
+        key_masks = key_masks[:, 0, :]     # 所以上面会多出个1维度来， 这里去掉才行，(None, max_len)
         
         # 获取行为序列中每个商品对应的注意力权重
         attention_score = self.local_att([query, keys])  # (None, max_len)
@@ -164,7 +169,7 @@ class AttentionPoolingLayer(Layer):
         paddings = tf.zeros_like(attention_score) # (None, max_len)
         
         # outputs 表示的是padding之后的attention_score
-        outputs = tf.where(tf.equal(key_masks, 0), attention_score, paddings) # B x len
+        outputs = tf.where(key_masks, attention_score, paddings) # B x len
         
         # 将注意力分数与序列对应位置加权求和
         outputs = tf.expand_dims(outputs, axis=1)   # (None, 1, max_len)
@@ -198,6 +203,7 @@ def DIN(feature_columns, behavior_feature_list, behavior_seq_feature_list):
     # 构建Input层并将Input层转成列表作为模型的输入
     input_layer_dict = build_input_layers(feature_columns)
     input_layers = list(input_layer_dict.values())
+    user_behavior_length = input_layer_dict["seq_length"]
     
     # 筛选出特征中的sparse和Dense特征， 后面要单独处理
     sparse_feature_columns = list(filter(lambda x: isinstance(x, SparseFeat), feature_columns))
@@ -228,7 +234,7 @@ def DIN(feature_columns, behavior_feature_list, behavior_seq_feature_list):
     # 使用注意力机制将历史行为的序列池化，得到用户的兴趣
     dnn_seq_input_list = []
     for i in range(len(keys_embed_list)):
-        seq_embed = AttentionPoolingLayer()([query_embed_list[i], keys_embed_list[i]])  # (None, embed_dim)
+        seq_embed = AttentionPoolingLayer()([query_embed_list[i], keys_embed_list[i], user_behavior_length])  # (None, embed_dim)
         dnn_seq_input_list.append(seq_embed)
     
     # 将多个行为序列的embedding进行拼接
