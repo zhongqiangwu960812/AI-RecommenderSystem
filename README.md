@@ -1,5 +1,8 @@
 # AI-RecommenderSystem
-该仓库尝试整理推荐系统领域的一些经典算法模型，主要包括传统的推荐算法模型和深度学习模型， 并尝试用浅显易懂的语言把每个模型或者算法解释清楚！此次整理依然是通过CSDN博客+GitHub的形式进行输出， CSDN主要整理算法的原理或者是经典paper的解读， 而GitHub上主要是模型的复现和实践。实验所用的数据集如下：
+该仓库尝试整理推荐系统领域的一些经典算法模型，主要包括传统的推荐算法模型和深度学习模型， 并尝试用浅显易懂的语言把每个模型或者算法解释清楚！此次整理依然是通过CSDN博客+GitHub的形式进行输出， CSDN主要整理算法的原理或者是经典paper的解读， 而GitHub上主要是模型的复现和实践，模型的复现这块不限于Pytorch框架或者TensorFlow框架， 下面很多模型是使用了两种框架，Pytorch使用了经典的那种建模风格， 而TensorFlow使用了Deepctr的函数式API的那种建模风格。
+
+实验所用的数据集如下：
+
 * [Movielens](https://github.com/ZiyaoGeng/Recommender-System-with-TF2.0/wiki/Movielens)
 * [Amazon Dataset](https://github.com/ZiyaoGeng/Recommender-System-with-TF2.0/wiki/Amazon-Dataset)
 * [Criteo Dataset](https://github.com/ZiyaoGeng/Recommender-System-with-TF2.0/wiki/Criteo-Dataset)
@@ -113,15 +116,35 @@ DeepFM的思路还是很简单的， 但是起的作用也是非常大的， 所
 NFM的思路也是FM+DNN的组合， 只不过这里提出了一种新的连接结构特征交叉池化， 文章传输了一个挺有趣的想法，就是如果底层的模块能够捕捉到更多的交互信息，那么只需要用很浅层的DNN就能达到很好的效果。 关于模型的具体细节，可以参考我的博客。<br><br>
 筋斗云：[AI上推荐 之 FNN、DeepFM与NFM(FM在深度学习中的身影重现)](https://blog.csdn.net/wuzhongqiang/article/details/109532267)
 
-## 2.8 AFM Networks
-这个是2017年浙江大学和新加坡国立大学研究员提出的一个模型， 依然来自何向南教授的团队， 这篇文章又使用了一个新的结构Attention对传统的FM进行改进， FM非常擅长学习特征之间的二阶交互， 但是存在的一个问题就是FM把所有交互的特征同等的对待， 即认为这些交互特征对于预测目标来说的重要程度一样， 这个在作者看来是FM的一个缺点所在， 所以使用了Attention结构来改进FM， 通过一个注意力网络对于每个特征交互根据对预测结果的重要程度进行了加权， 进一步增强了模型的表达，并且也增加了模型的可解释性。这个模型可以看做是NFM的延伸， 和NFM是从两个不同的方向改进了FM， 但是又可以结合起来， 因为这个模型就是在NFM的基础上， 在特征交叉层与池化层之间加入了一个注意力网络对特征交叉层的交互特征进行了加权，然后进入了池化层。 不过这次AFM这里没有在池化层后面加入DNN了。本篇文章最大的创新就是注意力网络， 使得特征交互有了一个重要性区分， 更加符合真实的业务场景。<br><br>
+## 2.8 [AFM Networks](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/AFM)
+这个是2017年浙江大学和新加坡国立大学研究员提出的一个模型， 依然来自何向南教授的团队， 这篇文章又使用了一个新的结构Attention对传统的FM进行改进， FM非常擅长学习特征之间的二阶交互， 但是存在的一个问题就是FM把所有交互的特征同等的对待， 即认为这些交互特征对于预测目标来说的重要程度一样， 这个在作者看来是FM的一个缺点所在， 所以使用了Attention结构来改进FM， 通过一个注意力网络对于每个特征交互根据对预测结果的重要程度进行了加权， 进一步增强了模型的表达，并且也增加了模型的可解释性。这个模型可以看做是NFM的延伸， 和NFM是从两个不同的方向改进了FM， 但是又可以结合起来， 因为这个模型就是在NFM的基础上， 在特征交叉层与池化层之间加入了一个注意力网络对特征交叉层的交互特征进行了加权，然后进入了池化层。 不过这次AFM这里没有在池化层后面加入DNN了。本篇文章最大的创新就是注意力网络， 使得特征交互有了一个重要性区分， 更加符合真实的业务场景。
+
+<img src="https://img-blog.csdnimg.cn/20210102204934171.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center" style="zoom:80%;" />
+
+AFM这里的核心创新点，就是在原来NFM的基础上进入了新的模块注意力机制， 关于该模型的具体细节，可以参考下面的博客。<br>
 
 筋斗云：[AI上推荐 之 AFM与DIN模型（当推荐系统遇上了注意力机制）](https://blog.csdn.net/wuzhongqiang/article/details/109532346)
 
-## 2.9 Deep Interest Networks
-这是2018年阿里在KDD上的一个模型， DIN模型是基于真实的业务场景搞的， 解决的痛点是深度学习模型无法表达用户多样化的兴趣。 它可以通过考虑【给定的候选广告】和【用户的历史行为】的相关性，来计算用户兴趣的表示向量。具体来说就是通过引入局部激活单元，通过软搜索历史行为的相关部分来关注相关的用户兴趣，并采用加权和来获得有关候选广告的用户兴趣的表示。与候选广告相关性较高的行为会获得较高的激活权重，并支配着用户兴趣。该表示向量在不同广告上有所不同，大大提高了模型的表达能力。 这个模型我一直在强调应用场景， 是因为并不是任何时候都适合这个模型的，很大一个前提是丰富的用户历史行为数据。<br><br>
+## 2.9 [Deep Interest Networks](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/DIN)
+这是2018年阿里在KDD上的一个模型， DIN模型是基于真实的业务场景搞的， 解决的痛点是深度学习模型无法表达用户多样化的兴趣。 它可以通过考虑【给定的候选广告】和【用户的历史行为】的相关性，来计算用户兴趣的表示向量。具体来说就是通过引入局部激活单元，通过软搜索历史行为的相关部分来关注相关的用户兴趣，并采用加权和来获得有关候选广告的用户兴趣的表示。与候选广告相关性较高的行为会获得较高的激活权重，并支配着用户兴趣。该表示向量在不同广告上有所不同，大大提高了模型的表达能力。 这个模型我一直在强调应用场景， 是因为并不是任何时候都适合这个模型的，很大一个前提是丰富的用户历史行为数据。
+
+<img src="https://img-blog.csdnimg.cn/20210118220015871.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center" style="zoom:80%;" />
+
+关于DIN的具体细节， 可以参考我下面的博客。
+
+<br>
 
 筋斗云：[AI上推荐 之 AFM与DIN模型（当推荐系统遇上了注意力机制）](https://blog.csdn.net/wuzhongqiang/article/details/109532346)
+
+## 2.10 [Deep Interest Evolution Network](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/DIEN)
+
+DeepInterestEvolutionNetwork(深度进化网络)是阿里2019年提出的模型， 是上一个DIN的演化版本。 该模型的创新点就是“兴趣进化网络”， 在这里面用序列模型模拟了用户兴趣的进化过程，能模拟用户的演化过程在很多推荐场景中是非常重要的。于是乎，为了更好的利用序列信息， 该网络进行了序列模型与推荐系统的尝试，最后形成了这样一个能动态模拟用户兴趣变化的一个网络机制。 这个网络机制主要分为兴趣提取层和兴趣演化层， 兴趣提取层干的事情就是从连续的用户行为中提取一系列的兴趣动态， 使用了GRU网络并提出了新的一种训练网络的方法。 兴趣进化层通过与注意力机制结合， 使得模型能够更有针对性的模拟与目标广告相关的兴趣进化路径。在兴趣进化层部分， 提出了一种新的结构单元AUGRU，就是在原来GRU的基础上，改变了更新门的计算方式。 这就是整个网络的核心内容了。
+
+<img src="https://img-blog.csdnimg.cn/20210221165854948.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center" style="zoom:80%;" />
+
+关于网络的具体细节，依然是参考下面的博客。<br><br>
+
+筋斗云：[AI上推荐 之 DIEN模型(序列模型与推荐系统的花火碰撞)](https://blog.csdn.net/wuzhongqiang/article/details/109532438)
 
 # 3. 附加
 
