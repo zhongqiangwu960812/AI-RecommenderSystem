@@ -146,6 +146,26 @@ DeepInterestEvolutionNetwork(深度进化网络)是阿里2019年提出的模型�
 
 筋斗云：[AI上推荐 之 DIEN模型(序列模型与推荐系统的花火碰撞)](https://blog.csdn.net/wuzhongqiang/article/details/109532438)
 
+## 2.11 [Deep Session Interest Network]([AI-RecommenderSystem/DSIN at master · zhongqiangwu960812/AI-RecommenderSystem (github.com)](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/DSIN))
+
+DSIN阿里2019年提出的新模型，全称是Deep Session Interest Network(深度会话兴趣网络)， 重点在这个Session上，这个是在DIEN的基础上又进行的一次演化，这个模型的改进出发点依然是如何通过用户的历史点击行为，从里面更好的提取用户的兴趣以及兴趣的演化过程，DSIN从行为序列的组成结构会话的角度去进行用户兴趣的提取和演化过程的学习，在这个过程中用到了一些新的结构，比如Transformer中的多头注意力，比如双向LSTM结构， 再比如前面的局部Attention结构。 主要分为会话兴趣分割层，会话兴趣提取层，会话兴趣交互层以及局部激活。结构如下：
+
+<img src="https://img-blog.csdnimg.cn/20210310151619214.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center" style="zoom:67%;" />
+
+关于网络的具体细节，依然是参考下面的博客。<br><br>
+
+筋斗云：[AI上推荐 之 DSIN模型(阿里DIEN之上的再探索，Transformer来了)]([AI上推荐 之 DSIN模型(阿里DIEN之上的再探索，Transformer来了)_Miracle8070-CSDN博客_dsin 阿里](https://blog.csdn.net/wuzhongqiang/article/details/114500619))
+
+## 2.12 [eXtreme DeepFM]([AI-RecommenderSystem/xDeepFM at master · zhongqiangwu960812/AI-RecommenderSystem (github.com)](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/xDeepFM))
+
+xDeepFM是2018年中科大联合微软在KDD上提出的一个模型，这个模型的改进出发点依然是如何更好的学习特征之间的高阶交互作用，从而挖掘更多的交互信息。而基于这样的动机，作者提出了又一个更powerful的网络来完成特征间的高阶显性交互，这个网络叫做 这个网络叫做CIN(Compressed Interaction Network)，这个网络也是xDeepFM的亮点或者核心创新点了。xDeepFM的模型架构依然是w&D结构，更好的理解方式就是用这个CIN网络代替了DCN里面的Cross Network， 这样使得该网络同时能够显性和隐性的学习特征的高阶交互(显性由CIN完成，隐性由DNN完成)。模型结构如下：
+
+<img src="https://img-blog.csdnimg.cn/2021050520373226.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_16,color_FFFFFF,t_70#pic_center" style="zoom:67%;" />
+
+关于网络的具体细节，依然是参考下面的博客。<br><br>
+
+筋斗云：[AI上推荐 之 xDeepFM模型(显隐性高阶特征交互的组合策略)]([AI上推荐 之 xDeepFM模型(显隐性高阶特征交互的组合策略)_Miracle8070-CSDN博客](https://blog.csdn.net/wuzhongqiang/article/details/116379857))
+
 # 3. 附加
 
 ## 3.1 基于内容的推荐算法
