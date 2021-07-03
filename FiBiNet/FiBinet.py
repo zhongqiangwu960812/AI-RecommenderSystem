@@ -248,9 +248,11 @@ def fibinet(linear_feature_columns, dnn_feature_columns,  bilinear_type='interac
     
     # 双线性交互层
     senet_bilinear_out = BilinearInteraction(bilinear_type=bilinear_type)(senet_embedding_list)
+    senet_bilinear_out = Flatten()(senet_bilinear_out)
     raw_bilinear_out = BilinearInteraction(bilinear_type=bilinear_type)(sparse_embedding_list)
+    raw_bilinear_out = Flatten()(raw_bilinear_out)
     
-    bilinear_out = Flatten()(Concatenate(axis=1)([senet_bilinear_out, raw_bilinear_out]))
+    bilinear_out = Concatenate(axis=1)([senet_bilinear_out, raw_bilinear_out])
     
     # DNN层的输入和输出
     dnn_input = Concatenate(axis=1)([bilinear_out, dnn_concat_dense_inputs])
