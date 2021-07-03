@@ -166,6 +166,13 @@ xDeepFM是2018年中科大联合微软在KDD上提出的一个模型，这个模
 
 筋斗云：[AI上推荐 之 xDeepFM模型(显隐性高阶特征交互的组合策略)_Miracle8070-CSDN博客](https://blog.csdn.net/wuzhongqiang/article/details/116379857)
 
+## 2.13 [FiBiNet](https://github.com/zhongqiangwu960812/AI-RecommenderSystem/tree/master/FiBiNet)
+FiBiNET(Feature Importance and Bilinear feature Interaction)是2019年发表在RecSys(ACM组织的在推荐系统领域的专会)的模型，来自新浪微博张俊林老师的团队。 这个模型如果从模型演化的角度来看， 主要是在特征重要性以及特征之间交互上做出了探索， 主要是通过SENET layer对不同的特征，根据对预测目标的重要性进行加权， 另外一个就是在特征embedding交互上面提出了一种双线性特征交互的方式， 文章简单明了，通俗易懂。模型结构如下:
+![](https://img-blog.csdnimg.cn/20210703160140322.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center)
+
+关于网络的细节， 依然是参考下面的博客。<br><br>
+筋斗云：[AI上推荐 之 FiBiNET模型(特征重要性选择与双线性特征交叉)](https://blog.csdn.net/wuzhongqiang/article/details/118439590)
+
 # 3. 附加
 
 ## 3.1 基于内容的推荐算法
