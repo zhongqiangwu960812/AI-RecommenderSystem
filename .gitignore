@@ -1,2 +1,6 @@
 Dataset/*
 **/logs/*
+**/ckpt_*
+**/ckpt/*
+**/__pycache__/*
+**/.DS_Store/*
