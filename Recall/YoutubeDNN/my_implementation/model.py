@@ -38,7 +38,7 @@ class YouTubeDNN(keras.Model):
             doc_embedding.vocab_size,
             self._dnn_dims[-1],
         )
-        self._dense_feat_config= dense_feat
+        self._dense_feat_config = dense_feat
 
         self._final_bias = self.add_weight(
             "final_bias",
